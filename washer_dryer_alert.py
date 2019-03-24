@@ -36,15 +36,15 @@ while True:
     if len(samples) > SAMPLE_SIZE:
         samples = np.delete(samples,0)
     moving_average = np.mean(samples)
-    print(moving_average)
+    #print(moving_average)
     
     if moving_average > THRESHOLD and state is washer_dryer_state.OFF: # if the washer is on change the state
         state = washer_dryer_state.ON
         #alert user the washer is on
         alerter.send_alert('washer-dryer on!')
-        print('Washer On!')
+        #print('Washer On!')
     elif moving_average < THRESHOLD and state is washer_dryer_state.ON: # if the state is on but it turned off then switch the state and alert the user
         state = washer_dryer_state.OFF
-        print('Washer Off!')
+        #print('Washer Off!')
         alerter.send_alert('washer-dryer finished!')
 
