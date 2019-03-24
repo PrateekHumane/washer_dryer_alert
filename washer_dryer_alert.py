@@ -2,6 +2,7 @@ import Adafruit_ADS1x15
 import time
 from enum import Enum
 import numpy as np
+from pushbullet_alert import pushbullet
 
 adc = Adafruit_ADS1x15.ADS1115()
 
@@ -28,6 +29,8 @@ def getNoise():
     amplitude = smax-smin
     return amplitude
 
+alerter = pushbullet('o.RwtuKs4bnRUo1LukkSZ6XMBE7IZh3T4L')
+
 while True:
     samples = np.append(samples,getNoise())
     if len(samples) > SAMPLE_SIZE:
@@ -38,8 +41,10 @@ while True:
     if moving_average > THRESHOLD and state is washer_dryer_state.OFF: # if the washer is on change the state
         state = washer_dryer_state.ON
         #alert user the washer is on
+        alerter.send_alert('washer-dryer on!')
         print('Washer On!')
     elif moving_average < THRESHOLD and state is washer_dryer_state.ON: # if the state is on but it turned off then switch the state and alert the user
         state = washer_dryer_state.OFF
         print('Washer Off!')
+        alerter.send_alert('washer-dryer finished!')
 
