@@ -6,7 +6,7 @@ from pushbullet_alert import pushbullet
 
 adc = Adafruit_ADS1x15.ADS1115()
 
-THRESHOLD = 1000
+THRESHOLD = 2000
 
 class washer_dryer_state(Enum):
     ON = 1
@@ -14,7 +14,7 @@ class washer_dryer_state(Enum):
 state = washer_dryer_state.OFF 
 
 samples = np.array([])
-SAMPLE_SIZE = 100
+SAMPLE_SIZE = 200
 
 def getNoise():
     start = time.time()
@@ -29,7 +29,7 @@ def getNoise():
     amplitude = smax-smin
     return amplitude
 
-alerter = pushbullet('o.RwtuKs4bnRUo1LukkSZ6XMBE7IZh3T4L')
+alerter = pushbullet('o.tbcN3E8kIcVJ7z7QYNOg4LovZFLdsF4x')
 
 while True:
     samples = np.append(samples,getNoise())

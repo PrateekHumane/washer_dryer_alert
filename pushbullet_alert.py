@@ -10,5 +10,3 @@ class pushbullet:
         header = {'Access-Token': self.api_key}
         requests.post('https://api.pushbullet.com/v2/pushes',data=payload,headers=header)
 
-test = pushbullet('o.RwtuKs4bnRUo1LukkSZ6XMBE7IZh3T4L')
-test.send_alert('hello!')
